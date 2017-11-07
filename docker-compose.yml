@@ -1,7 +1,7 @@
 version: '2'
 services:
   db:
-    image: postgres
+    image: informaticsmatters/rdkit_cartridge 
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
