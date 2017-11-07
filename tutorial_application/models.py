@@ -1,3 +1,7 @@
-from django.db import models
+from django_rdkit import models
 
-# Create your models here.
+class Compound(models.Model):
+
+	name = models.CharField(max_length=256)
+	molecule = models.MolField()
+
