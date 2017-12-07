@@ -76,8 +76,7 @@ Creating dockercomposedjangordkit_web_1 ...
 Creating dockercomposedjangordkit_web_1 ... done
 ```
 
-Please access `http://0.0.0.0:8000` or `http://localhost:8000`, 
-Then you can see `It worked!`
+Please access `http://0.0.0.0:8000` or `http://localhost:8000`, then you can see `It worked!`
 
 If you can't, please restart docker-compose.
 
@@ -92,7 +91,7 @@ Restarting dockercomposedjangordkit_db_1  ... done
 ```
 
 ### 3. Initialize the database
-First, initialize the database by doing `migrate`.
+First, initialize the database by doing `migrate`.  
 You can use Django's manage.py command by simply adding `docker-compose run web` at the beginning.
 
 ```
