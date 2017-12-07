@@ -2,7 +2,7 @@
 Docker-compose to use compound database easily.
 
 For an explanation of Japanese please see this article.  
-(日本語の説明はこちらの記事をご覧ください)
+(日本語の説明はこちらの記事をご覧ください)  
 [Django + RDKit database cartridge のDocker-composeで化合物データベースを作った話](https://qiita.com/yamasakih/items/58b3ef5eae6bfcd7fcf5)
 
 
