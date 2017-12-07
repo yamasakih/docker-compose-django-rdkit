@@ -10,17 +10,18 @@ For an explanation of Japanese please see this article.
 ### db
 PostgreSQL with [RDKit database cartridge](http://www.rdkit.org/docs/Cartridge.html) for compound database
 
+- PostsgreSQL (version 9.5)
+- RDKit database cartridge (latest)
+
 ### web
 [Django](https://www.djangoproject.com/) with [django-rdkit](https://github.com/rdkit/django-rdkit) for creating database and using database with Python
 
-- PostsgreSQL (version 9.5)
-- RDKit database cartridge (latest)
 - Python (version 3.6.0)
    - Django (version 1.11.7)
    - django-rdkit (version 0.0.5)
-   - psycopg2 (2.7.3.2)
-   - Pillow (4.3.0)
-   - RDKit (2017.03.1)
+   - psycopg2 (version 2.7.3.2)
+   - Pillow (version 4.3.0)
+   - RDKit (version 2017.03.1)
  
 
 ## How to use
