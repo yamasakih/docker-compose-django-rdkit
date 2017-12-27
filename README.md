@@ -41,33 +41,61 @@ Just to do this.
 
 ```
 > $ docker-compose up -d
+Creating network "dockercomposedjangordkit_default" with the default driver
+Creating volume "dockercomposedjangordkit_dbdata" with default driver
 Building web
 Step 1/9 : FROM kubor/alpine-rdkit
  ---> e204cd64867b
 Step 2/9 : RUN apk add --no-cache git
  ---> Using cache
- ---> 2a4dd71a32de
+ ---> 6f0e09b5f69e
 Step 3/9 : ENV PYTHONUNBUFFERED 1
- ---> Using cache
- ---> 94d37711a020
+ ---> Running in 982f015c0877
+ ---> 58d9165cab2a
+Removing intermediate container 982f015c0877
 Step 4/9 : RUN mkdir /code
- ---> Using cache
- ---> 29eba93d19e3
+ ---> Running in 7b035348c449
+ ---> 708259c183bb
+Removing intermediate container 7b035348c449
 Step 5/9 : WORKDIR /code
- ---> Using cache
- ---> 2c39f3a58382
+ ---> 3b5c539129fa
+Removing intermediate container 480ea5c995f3
 Step 6/9 : ADD requirements.txt /code/
- ---> Using cache
- ---> b78f5f28252e
+ ---> 077e3641fbc3
 Step 7/9 : RUN pip install -r requirements.txt
- ---> Using cache
- ---> e9e280e6de32
+ ---> Running in 561f24e020db
+Collecting Django==1.11.7 (from -r requirements.txt (line 1))
+  Downloading Django-1.11.7-py2.py3-none-any.whl (6.9MB)
+Collecting psycopg2==2.7.3.2 (from -r requirements.txt (line 2))
+  Downloading psycopg2-2.7.3.2-cp36-cp36m-manylinux1_x86_64.whl (2.7MB)
+Collecting pillow==4.3.0 (from -r requirements.txt (line 3))
+  Downloading Pillow-4.3.0-cp36-cp36m-manylinux1_x86_64.whl (5.8MB)
+Collecting pytz (from Django==1.11.7->-r requirements.txt (line 1))
+  Downloading pytz-2017.3-py2.py3-none-any.whl (511kB)
+Collecting olefile (from pillow==4.3.0->-r requirements.txt (line 3))
+  Downloading olefile-0.44.zip (74kB)
+Building wheels for collected packages: olefile
+  Running setup.py bdist_wheel for olefile: started
+  Running setup.py bdist_wheel for olefile: finished with status 'done'
+  Stored in directory: /root/.cache/pip/wheels/20/58/49/cc7bd00345397059149a10b0259ef38b867935ea2ecff99a9b
+Successfully built olefile
+Installing collected packages: pytz, Django, psycopg2, olefile, pillow
+Successfully installed Django-1.11.7 olefile-0.44 pillow-4.3.0 psycopg2-2.7.3.2 pytz-2017.3
+ ---> 2cb6ac1ae78d
+Removing intermediate container 561f24e020db
 Step 8/9 : RUN pip install git+https://github.com/rdkit/django-rdkit.git
- ---> Using cache
- ---> 3aba85854ed2
+ ---> Running in 04157c63862e
+Collecting git+https://github.com/rdkit/django-rdkit.git
+  Cloning https://github.com/rdkit/django-rdkit.git to /tmp/pip-tju8uk22-build
+Installing collected packages: django-rdkit
+  Running setup.py install for django-rdkit: started
+    Running setup.py install for django-rdkit: finished with status 'done'
+Successfully installed django-rdkit-0.0.5
+ ---> 75c0a26d8fbe
+Removing intermediate container 04157c63862e
 Step 9/9 : ADD . /code/
- ---> 63843c8a3ab1
-Successfully built 63843c8a3ab1
+ ---> 7dc60211c63c
+Successfully built 7dc60211c63c
 Successfully tagged dockercomposedjangordkit_web:latest
 WARNING: Image for service web was built because it did not already exist. To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
 Creating dockercomposedjangordkit_db_1 ... 
@@ -116,5 +144,24 @@ Running migrations:
   Applying sessions.0001_initial... OK```
 ```
 
+### 4. Delete mount volume
+This Docker-compose uses named volume.  
+If it becomes unnecessary, delete it with the following command.
+
+```
+> $ docker volume list
+DRIVER              VOLUME NAME
+local               dockercomposedjangordkit_dbdata
+```
+
+```
+> $ docker volume rm dockercomposedjangordkit_dbdata 
+dockercomposedjangordkit_dbdata
+```
+
+```
+> $ docker volume list                        
+DRIVER              VOLUME NAME
+```
 
 For more information, see branch [add-mol-table](https://github.com/yamasakih/docker-compose-django-rdkit/tree/feature/add-mol-table) or django-rdkit's [tutorial.rst](https://github.com/rdkit/django-rdkit/blob/master/docs/tutorial.rst).
