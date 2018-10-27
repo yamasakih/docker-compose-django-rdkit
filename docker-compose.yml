@@ -1,21 +1,22 @@
-version: '2'
+version: '2.3'
 services:
   db:
-    image: informaticsmatters/rdkit_cartridge 
+    image: informaticsmatters/rdkit_cartridge
     volumes:
       - dbdata:/var/lib/postgresql/data
       - ./postgresql.conf:/etc/postgresql.conf
     command: 'postgres -c config_file="/etc/postgresql.conf"'
     ports:
-      - "5432:5432"
-  web:
+      - '5432:5432'
+  main:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    init: true
+    command: "jupyter notebook --allow-root  --ip=0.0.0.0 --no-browser"
     volumes:
       - .:/code
     ports:
-      - "8000:8000"
-    depends_on:
+      - '8888:8888'
+    links:
       - db
 volumes:
   dbdata:
