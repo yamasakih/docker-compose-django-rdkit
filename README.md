@@ -5,7 +5,7 @@ This repositry were forked form [yamasakih/docker-compose-django-rdkit](https://
 ## Setup
 ```
 git clone git@github.com:masahiro-mochizuki/docker-compose-lbdd.git
-cd docker-compose-lbdd.git
+cd docker-compose-lbdd
 docker-compose build
 ```
 
