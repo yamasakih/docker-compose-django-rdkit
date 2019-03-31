@@ -12,7 +12,7 @@ docker-compose build
 ## How to use
 ### Launch Jupyter Notebook
 ```
-docker-compose up
+docker-compose up default
 ```
 
 After execution of the above command, the message below will be shown like this:
@@ -20,37 +20,34 @@ After execution of the above command, the message below will be shown like this:
 ```
 main_1  |     Copy/paste this URL into your browser when you connect for the first time,
 main_1  |     to login with a token:
-main_1  |         http://(c3a6946d1451 or 127.0.0.1):8888/?token=f418177ee436734e621b0daf8f6ee76761105da5d13095a1
+main_1  |         http://(c3a6946d1451 or 127.0.0.1):8888/
 ```
 
 In this example, you can access jupyter via URL.
-`http://127.0.0.1:8888/?token=f418177ee436734e621b0daf8f6ee76761105da5d13095a1`.
+`http://127.0.0.1:8888/ .
 
 An example code of accessing PostgresSQL from jupyter is `examples/db_example.ipynb`.
 
 ### Excecute a python code
-you can execute a python code:
+you can execute a python code without PostgreSQL database:
 ```
-docker-compose run main python examples/mw_from_smiles.py CCC
+docker-compose run default  python examples/mw_from_smiles.py CCC
 ```
 
 ## Services
-### db
-PostgreSQL sever and [RDKit database cartridge](http://www.rdkit.org/docs/Cartridge.html) for compound database are
- installed.
-
-- PostsgreSQL (version 9.5)
-- RDKit database cartridge
-
-### main
-Packages and tools useful for LBDD are installed.
-
+### default
 - Python (version 3.6.0)
    - RDKit (version 2018.09.1.0)
    - scikit-learn
+   - lightGBM
+   - chainer
+   - optuna
+   - PostgreSQL10
    - pandas
    - numpy
    - matplotlib
    - tqdm
    - ipython
    - Jupyter Notebook
+### nvidia
+The same package as the default is installed, but this service supports CUDA10.0.

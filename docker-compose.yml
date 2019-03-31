@@ -1,22 +1,19 @@
 version: '2.3'
 services:
-  db:
-    image: informaticsmatters/rdkit_cartridge
-    volumes:
-      - dbdata:/var/lib/postgresql/data
-      - ./postgresql.conf:/etc/postgresql.conf
-    command: 'postgres -c config_file="/etc/postgresql.conf"'
-    ports:
-      - '5432:5432'
-  main:
+  default: &default
     build: .
-    init: true
-    command: "jupyter notebook --allow-root  --ip=0.0.0.0 --no-browser"
+    #init: true
+    user: "${UID}:${GID}"
+    #command: "jupyter notebook --allow-root  --ip=0.0.0.0 --no-browser"
+    #command: ["bash", "startup.sh"]
     volumes:
-      - .:/code
+      - "/etc/localtime:/etc/localtime:ro"
+      - "$PWD:/home/user/work"
+      - "pgdata:/var/lib/postgresql/10/main/"
     ports:
       - '8888:8888'
-    links:
-      - db
+  nvidia:
+    <<: *default
+    runtime: nvidia
 volumes:
-  dbdata:
+    pgdata:
